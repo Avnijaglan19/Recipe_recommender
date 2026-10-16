@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Titan Pantry Recipes — Your History</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/titan.css') }}">
+</head>
+<body>
+    <div class="container" style="max-width: 880px;">
+        <div class="top-bar">
+            <a href="{{ url_for('index') }}" class="pill-link">&larr; Back to search</a>
+            <a href="{{ url_for('logout') }}" class="pill-link">Log out</a>
+        </div>
+
+        <div class="page-header">
+            <h1>Your Past Recommendations</h1>
+            <p class="subtitle">Click a card to see the recipes it returned.</p>
+        </div>
+
+        {% if not past_requests %}
+            <p class="recipe-note" style="text-align:center;">You haven't searched for any recipes yet.</p>
+        {% endif %}
+
+        <div class="history-grid">
+            {% for entry in past_requests %}
+                {% set ingredients = entry.preferences.get('ingredients', []) %}
+                {% set recipes = entry.recipes %}
+                <div class="history-card" data-card>
+                    <button type="button" class="history-card-head" data-toggle>
+                        <span class="history-date">{{ entry.created_at }}</span>
+                        <span class="history-ingredients">
+                            {% if ingredients %}
+                                {{ ingredients[:3] | join(', ') }}{% if ingredients | length > 3 %} +{{ ingredients | length - 3 }} more{% endif %}
+                            {% else %}
+                                No ingredients listed
+                            {% endif %}
+                        </span>
+                        <span class="history-meta-row">
+                            {% if entry.preferences.get('diet_type') %}
+                                <span class="history-badge">{{ entry.preferences.get('diet_type') }}</span>
+                            {% endif %}
+                            <span class="history-count">{{ recipes | length }} recipe{{ 's' if recipes | length != 1 else '' }}</span>
+                        </span>
+                        <span class="history-chevron" data-chevron>&#9662;</span>
+                    </button>
+
+                    <div class="history-card-body" data-body>
+                        <div class="category-label">Full ingredient list</div>
+                        <p class="history-full-ingredients">{{ ingredients | join(', ') if ingredients else 'None' }}</p>
+
+                        <div class="category-label">Recipes suggested</div>
+                        {% if recipes %}
+                            <ul class="recipe-list">
+                                {% for recipe in recipes %}
+                                    <li>{{ recipe.get('recipe_title', recipe.get('title', 'Untitled recipe')) }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% else %}
+                            <p class="recipe-note">No recipes were returned for this search.</p>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <script>
+      document.querySelectorAll('[data-card]').forEach(card => {
+        const toggle = card.querySelector('[data-toggle]');
+        const body = card.querySelector('[data-body]');
+        const chevron = card.querySelector('[data-chevron]');
+        toggle.addEventListener('click', () => {
+          const isOpen = body.classList.toggle('open');
+          chevron.classList.toggle('open', isOpen);
+        });
+      });
+    </script>
+</body>
+</html>

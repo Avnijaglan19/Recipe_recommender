@@ -1,0 +1,24 @@
+{
+    "certification_type": "Standard Certification FDA-regulated products",
+    "total_fat_g": 6.5,
+    "saturated_fat_g": 1.0,
+    "saturated_fat_percent_calories": 15,
+    "trans_fat_g": 0.5,
+    "partially_hydrogenated_oils_allowed": false,
+    "cholesterol_mg": 20,
+    "sodium_limits_mg": [
+        140,
+        240,
+        360,
+        480
+    ],
+    "beneficial_nutrients_daily_value_percent": 10,
+    "beneficial_nutrients": [
+        "vitamin A",
+        "vitamin C",
+        "iron",
+        "calcium",
+        "protein",
+        "dietary fiber"
+    ]
+}

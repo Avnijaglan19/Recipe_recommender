@@ -1,0 +1,142 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f8f5ed;
+    color: #263238;
+}
+
+.container {
+    width: 80%;
+    max-width: 850px;
+    margin: 40px auto;
+    background-color: #ffffff;
+    padding: 35px;
+    border-radius: 16px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.10);
+}
+
+h1 {
+    text-align: center;
+    color: #2e7d32;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    text-align: center;
+    color: #6b6b6b;
+    margin-bottom: 30px;
+}
+
+h2 {
+    color: #2e7d32;
+    font-size: 20px;
+}
+
+.page-header {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 24px;
+}
+
+.summary-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+    margin-bottom: 24px;
+}
+
+.summary-card,
+.recipe-card {
+    border: 1px solid #e0e0e0;
+    border-radius: 14px;
+    padding: 20px;
+    background: #fafafa;
+}
+
+.summary-card h2,
+.recipe-card-header h2 {
+    margin-top: 0;
+    margin-bottom: 12px;
+    font-size: 18px;
+}
+
+.summary-card p,
+.recipe-card p {
+    margin: 8px 0;
+    line-height: 1.5;
+}
+
+.recipe-card-header {
+    margin-bottom: 12px;
+}
+
+.recipe-score {
+    color: #555;
+    margin-top: 8px;
+}
+
+.recipe-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    color: #4f4f4f;
+    margin-bottom: 14px;
+}
+
+.recipe-section {
+    margin-bottom: 18px;
+}
+
+.recipe-section h3 {
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.recipe-list {
+    margin: 0;
+    padding-left: 18px;
+}
+
+
+.recipe-text {
+    white-space: pre-wrap;
+    background: #ffffff;
+    border: 1px solid #dde2e7;
+    border-radius: 12px;
+    padding: 18px;
+    font-size: 14px;
+    line-height: 1.75;
+    color: #2f2f2f;
+}
+
+.actions {
+    margin-top: 22px;
+    text-align: center;
+}
+
+.button {
+    display: inline-block;
+    background-color: #2e7d32;
+    color: #ffffff;
+    padding: 12px 24px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.button:hover {
+    background-color: #276227;
+}
+
+@media (max-width: 760px) {
+    .container {
+        width: 94%;
+        padding: 20px;
+    }
+
+    .summary-grid {
+        grid-template-columns: 1fr;
+    }
+}

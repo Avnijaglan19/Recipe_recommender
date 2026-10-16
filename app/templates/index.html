@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Titan Pantry Recipes</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/titan.css') }}">
+</head>
+
+<body>
+
+    <div class="top-bar">
+    <a href="{{ url_for('history') }}" class="pill-link">View my history</a>
+    {% if session.get('role') == 'staff' %}
+        <a href="{{ url_for('inventory') }}" class="pill-link">Manage Inventory</a>
+    {% endif %}
+    <a href="{{ url_for('logout') }}" class="pill-link">Log out</a>
+</div>
+        <h1>Titan Pantry Recipes</h1>
+        <p class="subtitle">Cook with what you have in hand</p>
+
+        <div class="progress-track">
+            <div class="progress-seg done" data-seg="1"></div>
+            <div class="progress-seg" data-seg="2"></div>
+            <div class="progress-seg" data-seg="3"></div>
+            <div class="progress-seg" data-seg="4"></div>
+        </div>
+        <div class="step-label" id="stepLabel">Step 1 of 4 — Ingredients</div>
+
+        <form action="/results" method="POST" id="wizardForm">
+
+            <!-- Step 1: Ingredients -->
+            <div class="step active" data-step="1">
+                <h2>What's in your kitchen?</h2>
+                <p class="step-hint">Select everything you have on hand.</p>
+
+                <div class="category-label">Vegetables</div>
+                <div class="check-grid">
+                    <label class="check-item"><input type="checkbox" name="ingredients" value="Onion"><span class="check-box"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.5 12L13 4.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Onion</label>
+                    <label class="check-item"><input type="checkbox" name="ingredients" value="Tomato"><span class="check-box"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.5 12L13 4.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Tomato</label>
+                    <label class="check-item"><input type="checkbox" name="ingredients" value="Mushroom"><span class="check-box"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.5 12L13 4.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Mushroom</label>
+                    <label class="check-item"><input type="checkbox" name="ingredients" value="Bell Pepper"><span class="check-box"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.5 12L13 4.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Bell Pepper</label>
+                    <label class="check-item"><input type="checkbox" name="ingredients" value="Broccoli"><span class="check-box"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.5 12L13 4.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Broccoli</label>
+                    <label class="check-item"><input type="checkbox" name="ingredients" value="Spinach"><span class="check-box"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.5 12L13 4.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Spinach</label>
+                    <label class="check-item"><input type="checkbox" name="ingredients" value="Potato"><span class="check-box"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.5 12L13 4.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Potato</label>
+                    <label class="check-item"><input type="checkbox" name="ingredients" value="Carrot"><span class="check-box"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.5 12L13 4.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Carrot</label>
+                    <label class="check-item"><input type="checkbox" name="ingredients" value="Garlic"><span class="check-box"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.5 12L13 4.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Garlic</label>
+                </div>
+
+                <div class="category-label">Fruits</div>
+                <div class="check-grid">
+                    <label class="check-item"><input type="checkbox" name="ingredients" value="Apple"><span class="check-box"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.5 12L13 4.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Apple</label>
+                    <label class="check-item"><input type="checkbox" name="ingredients" value="Banana"><span class="check-box"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.5 12L13 4.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Banana</label>
+                    <label class="check-item"><input type="checkbox" name="ingredients" value="Orange"><span class="check-box"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.5 12L13 4.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Orange</label>
+                    <label class="check-item"><input type="checkbox" name="ingredients" value="Mango"><span class="check-box"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.5 12L13 4.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Mango</label>
+                    <label class="check-item"><input type="checkbox" name="ingredients" value="Blue Berries"><span class="check-box"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.5 12L13 4.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Blue Berries</label>
+                    <label class="check-item"><input type="checkbox" name="ingredients" value="Strawberries"><span class="check-box"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.5 12L13 4.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Strawberries</label>
+                </div>
+
+                <div class="category-label">Proteins</div>
+                <div class="check-grid">
+                    <label class="check-item"><input type="checkbox" name="ingredients" value="Chicken"><span class="check-box"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.5 12L13 4.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Chicken</label>
+                    <label class="check-item"><input type="checkbox" name="ingredients" value="Tofu"><span class="check-box"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.5 12L13 4.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Tofu</label>
+                    <label class="check-item"><input type="checkbox" name="ingredients" value="Fish"><span class="check-box"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.5 12L13 4.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Fish</label>
+                    <label class="check-item"><input type="checkbox" name="ingredients" value="Eggs"><span class="check-box"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.5 12L13 4.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Eggs</label>
+                    <label class="check-item"><input type="checkbox" name="ingredients" value="Turkey"><span class="check-box"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.5 12L13 4.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Turkey</label>
+                    <label class="check-item"><input type="checkbox" name="ingredients" value="Pork"><span class="check-box"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.5 12L13 4.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Pork</label>
+                    <label class="check-item"><input type="checkbox" name="ingredients" value="Beef"><span class="check-box"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.5 12L13 4.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Beef</label>
+                    <label class="check-item"><input type="checkbox" name="ingredients" value="Lentils"><span class="check-box"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.5 12L13 4.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Lentils</label>
+                </div>
+
+                <div class="category-label">Dairy</div>
+                <div class="check-grid">
+                    <label class="check-item"><input type="checkbox" name="ingredients" value="Milk"><span class="check-box"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.5 12L13 4.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Milk</label>
+                    <label class="check-item"><input type="checkbox" name="ingredients" value="Cheese"><span class="check-box"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.5 12L13 4.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Cheese</label>
+                    <label class="check-item"><input type="checkbox" name="ingredients" value="Yogurt"><span class="check-box"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.5 12L13 4.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Yogurt</label>
+                </div>
+
+                <div class="category-label">Grains and Pantry</div>
+                <div class="check-grid">
+                    <label class="check-item"><input type="checkbox" name="ingredients" value="Cooking Oil"><span class="check-box"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.5 12L13 4.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Cooking Oil</label>
+                    <label class="check-item"><input type="checkbox" name="ingredients" value="Basic Spices"><span class="check-box"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.5 12L13 4.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Basic Spices</label>
+                    <label class="check-item"><input type="checkbox" name="ingredients" value="Garlic power/ Onion Powder"><span class="check-box"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.5 12L13 4.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Garlic Powder / Onion Powder</label>
+                    <label class="check-item"><input type="checkbox" name="ingredients" value="Tomato sauce"><span class="check-box"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.5 12L13 4.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Tomato Sauce</label>
+                    <label class="check-item"><input type="checkbox" name="ingredients" value="Tomato paste"><span class="check-box"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.5 12L13 4.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Tomato Paste</label>
+                    <label class="check-item"><input type="checkbox" name="ingredients" value="Rice"><span class="check-box"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.5 12L13 4.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Rice</label>
+                    <label class="check-item"><input type="checkbox" name="ingredients" value="Pasta"><span class="check-box"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.5 12L13 4.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Pasta</label>
+                    <label class="check-item"><input type="checkbox" name="ingredients" value="Flour"><span class="check-box"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.5 12L13 4.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Flour</label>
+                    <label class="check-item"><input type="checkbox" name="ingredients" value="Tortilla"><span class="check-box"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.5 12L13 4.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Tortilla</label>
+                    <label class="check-item"><input type="checkbox" name="ingredients" value="Beans"><span class="check-box"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.5 12L13 4.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Beans</label>
+                    <label class="check-item"><input type="checkbox" name="ingredients" value="Cereal"><span class="check-box"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.5 12L13 4.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Cereal</label>
+                    <label class="check-item"><input type="checkbox" name="ingredients" value="Oats"><span class="check-box"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.5 12L13 4.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Oats</label>
+                    <label class="check-item"><input type="checkbox" name="ingredients" value="Bread"><span class="check-box"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.5 12L13 4.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Bread</label>
+                </div>
+            </div>
+
+            <!-- Step 2: Meal details -->
+            <div class="step" data-step="2">
+                <h2>Tell us about the meal</h2>
+                <p class="step-hint">A few quick details to narrow things down.</p>
+
+                <div class="field">
+                    <label for="meal_type">Meal Type</label>
+                    <select name="meal_type" id="meal_type" required>
+                        <option value="">Select meal type</option>
+                        <option value="breakfast">Breakfast</option>
+                        <option value="brunch">Brunch</option>
+                        <option value="lunch">Lunch</option>
+                        <option value="dinner">Dinner</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label for="servings">Servings</label>
+                    <select name="servings" id="servings" required>
+                        <option value="">Select servings</option>
+                        <option value="1">1 Serving</option>
+                        <option value="2">2 Servings</option>
+                        <option value="3">3 Servings</option>
+                        <option value="4">4 Servings</option>
+                        <option value="6">More than 5 Servings</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label for="cuisine">Cuisine</label>
+                    <select name="cuisine" id="cuisine" required>
+                        <option value="">Select cuisine</option>
+                        <option value="Indian">Indian</option>
+                        <option value="Mexican">Mexican</option>
+                        <option value="Thai">Thai</option>
+                        <option value="Italian">Italian</option>
+                        <option value="Chinese">Chinese</option>
+                        <option value="American">American</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Step 3: Diet & Health -->
+            <div class="step" data-step="3">
+                <h2>Diet &amp; health</h2>
+                <p class="step-hint">So we can filter out anything that doesn't fit.</p>
+
+                <div class="field">
+                    <label for="diet_type">Diet Preference</label>
+                    <select name="diet_type" id="diet_type" required>
+                        <option value="">Select diet type</option>
+                        <option value="veg">Veg</option>
+                        <option value="non-veg">Non-Veg</option>
+                        <option value="vegan">Vegan</option>
+                        <option value="halal">Halal</option>
+                    </select>
+                </div>
+
+                <div class="category-label">Health Issues</div>
+                <div class="check-grid">
+                    <label class="check-item"><input type="checkbox" name="health_issues" value="diabetes"><span class="check-box"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.5 12L13 4.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Diabetes</label>
+                    <label class="check-item"><input type="checkbox" name="health_issues" value="hypertension"><span class="check-box"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.5 12L13 4.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Hypertension</label>
+                    <label class="check-item"><input type="checkbox" name="health_issues" value="high cholesterol"><span class="check-box"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.5 12L13 4.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>High Cholesterol</label>
+                    <label class="check-item"><input type="checkbox" name="health_issues" value="No specific health issue"><span class="check-box"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.5 12L13 4.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>No Specific Health Issue</label>
+                </div>
+            </div>
+
+            <!-- Step 4: Kitchen setup -->
+            <div class="step" data-step="4">
+                <h2>Your kitchen setup</h2>
+                <p class="step-hint">What can you cook with, and what's your budget?</p>
+
+                <div class="category-label">Available Appliances</div>
+                <div class="check-grid">
+                    <label class="check-item"><input type="checkbox" name="appliance_type" value="Oven"><span class="check-box"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.5 12L13 4.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Oven</label>
+                    <label class="check-item"><input type="checkbox" name="appliance_type" value="Microwave"><span class="check-box"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.5 12L13 4.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Microwave</label>
+                    <label class="check-item"><input type="checkbox" name="appliance_type" value="Blender"><span class="check-box"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.5 12L13 4.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Blender</label>
+                    <label class="check-item"><input type="checkbox" name="appliance_type" value="Air fryer"><span class="check-box"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.5 12L13 4.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Air Fryer</label>
+                    <label class="check-item"><input type="checkbox" name="appliance_type" value="Grill"><span class="check-box"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.5 12L13 4.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Grill</label>
+                    
+                </div>
+
+                <div class="field" style="margin-top: 22px;">
+                    <label for="cost_range">Cost Range</label>
+                    <select name="cost_range" id="cost_range" required>
+                        <option value="">Select cost range</option>
+                        <option value="low">Low Cost</option>
+                        <option value="medium">Medium Cost</option>
+                        <option value="high">High Cost</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="wizard-nav">
+                <button type="button" class="btn btn-ghost" id="backBtn" disabled>Back</button>
+                <button type="button" class="btn btn-primary" id="nextBtn">Next</button>
+            </div>
+
+        </form>
+
+        {% if submitted %}
+        <div class="result-box">
+            <h2>Your Selected Options</h2>
+            <p><strong>Ingredients:</strong> {{ ingredients | join(", ") }}</p>
+            <p><strong>Meal Type:</strong> {{ meal_type }}</p>
+            <p><strong>Diet Type:</strong> {{ diet_type }}</p>
+            <p><strong>Cost Range:</strong> {{ cost_range }}</p>
+            <p><strong>Health Issues:</strong> {{ health_Issues | join(", ") if health_Issues else "None" }}</p>
+            <p><strong>Cuisine:</strong> {{ cuisine }}</p>
+        </div>
+        {% endif %}
+
+    </div>
+
+    <script>
+      const steps = document.querySelectorAll('.step');
+      const segs = document.querySelectorAll('.progress-seg');
+      const stepLabel = document.getElementById('stepLabel');
+      const backBtn = document.getElementById('backBtn');
+      const nextBtn = document.getElementById('nextBtn');
+      const form = document.getElementById('wizardForm');
+      const titles = ['Ingredients', 'Meal Details', 'Diet & Health', 'Kitchen Setup'];
+      let current = 1;
+      const total = steps.length;
+
+      function render() {
+        steps.forEach(s => s.classList.toggle('active', Number(s.dataset.step) === current));
+        segs.forEach(s => s.classList.toggle('done', Number(s.dataset.seg) <= current));
+        stepLabel.textContent = `Step ${current} of ${total} — ${titles[current - 1]}`;
+        backBtn.disabled = current === 1;
+        nextBtn.textContent = current === total ? 'Find Recipes' : 'Next';
+      }
+
+      backBtn.addEventListener('click', () => {
+        if (current > 1) { current--; render(); }
+      });
+
+      nextBtn.addEventListener('click', () => {
+        if (current < total) {
+          current++;
+          render();
+        } else {
+          // Last step's Next button is really the submit button. Using
+          // requestSubmit() (rather than a native type="submit") means the
+          // earlier steps' required <select> fields -- which are display:none
+          // right now -- are correctly skipped by browser validation, since
+          // hidden form controls aren't part of constraint validation. Only
+          // this step's fields need to be valid to submit.
+          if (form.reportValidity()) {
+            form.requestSubmit();
+          }
+        }
+      });
+
+      render();
+    </script>
+
+</body>
+</html>

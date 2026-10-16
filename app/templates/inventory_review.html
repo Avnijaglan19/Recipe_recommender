@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Titan Pantry Recipes — Review Extracted Items</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/titan.css') }}">
+</head>
+<body>
+    <div class="container" style="max-width: 720px;">
+        <div class="top-bar">
+            <a href="{{ url_for('inventory') }}" class="pill-link">&larr; Cancel</a>
+        </div>
+
+        <div class="page-header">
+            <h1>Review Extracted Items</h1>
+            <p class="subtitle">Check the items to add. Edit anything GPT misread before confirming — nothing is saved yet.</p>
+        </div>
+
+        <form action="{{ url_for('inventory_confirm') }}" method="POST">
+            <div class="form-section">
+                {% for item in items %}
+                    <div class="check-item" style="align-items:flex-start; margin-bottom:10px;">
+                        <input type="checkbox" name="confirm" value="{{ loop.index0 }}" {% if not item.get('low_confidence') %}checked{% endif %} style="position:static; opacity:1; width:20px; height:20px; margin-top:4px;">
+                        <div style="flex:1; display:flex; flex-direction:column; gap:6px;">
+                            <input type="text" name="item_name" value="{{ item.get('item_name', '') }}"
+                                   style="width:100%; padding:10px 12px; border:1px solid var(--line); border-radius:8px; font-size:14.5px; font-weight:600;">
+                            <input type="text" name="quantity" value="{{ item.get('quantity', '') }}" placeholder="Quantity"
+                                   style="width:100%; padding:8px 12px; border:1px solid var(--line); border-radius:8px; font-size:13.5px;">
+                            <span style="font-size:12px; color:var(--muted);">
+                                From {{ item.get('source_file', 'invoice') }}: "{{ item.get('raw_line', '') }}"
+                                {% if item.get('low_confidence') %}
+                                    <strong style="color:#B4472C;">— low confidence, double-check this one</strong>
+                                {% endif %}
+                            </span>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <button type="submit" class="btn btn-primary">Add Checked Items to Inventory</button>
+        </form>
+    </div>
+</body>
+</html>

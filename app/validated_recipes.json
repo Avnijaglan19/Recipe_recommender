@@ -1,0 +1,101 @@
+[
+    {
+        "recipe_title": "RAINBOW PASTA",
+        "score": 6,
+        "matched_ingredients": [
+            "Pasta",
+            "Bell Pepper",
+            "Tomato Paste",
+            "Cheese"
+        ],
+        "additional_ingredients_needed": [
+            "Mixed vegetables (broccoli, carrots, cauliflower, zucchini)",
+            "Diced tomatoes with Italian herbs"
+        ],
+        "servings": "3",
+        "adjusted_ingredient_amounts": [
+            "6 ounces dry pasta",
+            "1 1/2 cups chopped fresh or frozen mixed vegetables (broccoli, carrots, cauliflower, zucchini)",
+            "11 ounces diced tomatoes with Italian herbs",
+            "6 tablespoons shredded part-skim Mozzarella cheese or Parmesan cheese"
+        ],
+        "appliances_used": [
+            "Oven"
+        ],
+        "preparation_steps": [
+            "Cook 6 ounces pasta as directed on the package.",
+            "When pasta is done, add 1 1/2 cups chopped fresh or frozen mixed vegetables. Cook 2 more minutes for fresh vegetables or 1 minute for frozen. Turn off heat. Drain pasta and vegetables carefully.",
+            "Put pot back on stove over medium-low heat. Add 10.9 ounces diced tomatoes with their juices to the pot. Stir well. Heat 1-2 minutes.",
+            "Remove from heat. Split pasta and vegetables between plates or bowls. Top each with 2 tablespoons cheese. Serve right away."
+        ],
+        "health_goal_explanation": "Selected health goal: high cholesterol. Guideline source: American Heart Association (AHA) recommendations. This recipe is suitable because it is low in saturated fat and cholesterol (10 mg cholesterol, 2 g saturated fat per original serving, scaled down for 3 servings), uses part-skim cheese, and includes a variety of vegetables. It avoids high cholesterol animal fats and uses healthy ingredients. Sodium is moderate. The recipe supports a heart-healthy diet by emphasizing vegetables and whole grain pasta (if used).",
+        "why_it_matches": "The recipe matches user's ingredients of pasta, bell pepper, tomato paste (diced tomatoes assumed from tomato paste selection), and cheese. It is low in cholesterol and saturated fat, fitting the health goal. The recipe uses the oven appliance the user has. Minor additional vegetables are needed but are common and minor.",
+        "nutritional_information": "Calories: 320 per serving, Total Fat: 4.5 g, Saturated Fat: 2 g, Cholesterol: 10 mg, Sodium: 230 mg, Total Carbohydrate: 55 g, Dietary Fiber: 5 g, Protein: 15 g",
+        "recipe_url": "https://calfreshhealthyliving.cdph.ca.gov/en/recipes/Pages/Rainbow-Pasta.aspx",
+        "llm_reported_score": "9",
+        "is_valid": true,
+        "rejection_reason": null,
+        "pantry_available_ingredients": [
+            "Mixed vegetables (broccoli, carrots, cauliflower, zucchini)",
+            "Diced tomatoes with Italian herbs"
+        ]
+    },
+    {
+        "recipe_title": "SWISS CHARD PINWHEEL BREAD",
+        "score": 4,
+        "matched_ingredients": [
+            "Mushroom",
+            "Onion",
+            "Cheese",
+            "Basic Spices",
+            "Garlic power/ Onion Powder",
+            "Bread"
+        ],
+        "additional_ingredients_needed": [
+            "Swiss chard",
+            "Water",
+            "Parmesan cheese",
+            "Marinara sauce"
+        ],
+        "servings": "3",
+        "adjusted_ingredient_amounts": [
+            "1 7/8 cups sliced mushrooms",
+            "3/16 cup chopped onion",
+            "3 cups chopped Swiss chard",
+            "3/4 tablespoon water",
+            "3/8 teaspoon garlic powder",
+            "3/16 teaspoon ground black pepper",
+            "3/16 teaspoon salt",
+            "3/4 tablespoon grated Parmesan cheese",
+            "5 to 6 ounces refrigerated pizza crust dough",
+            "3/8 cup shredded part-skim Mozzarella cheese",
+            "9/16 cup marinara sauce"
+        ],
+        "appliances_used": [
+            "Oven"
+        ],
+        "preparation_steps": [
+            "Place an oven rack in the middle of the oven. Preheat oven to 350\u00b0F.",
+            "Spray a skillet with nonstick cooking spray and heat over medium heat.",
+            "Add 1 7/8 cups sliced mushrooms and 3/16 cup chopped onion and saut\u00e9 until tender, about 5 minutes.",
+            "Add 3 cups chopped Swiss chard and 3/4 tablespoon water. Continue cooking until Swiss chard becomes tender, about 8 to 10 minutes (add more water if needed).",
+            "Add 3/8 teaspoon garlic powder, 3/16 teaspoon ground black pepper, and 3/16 teaspoon salt.",
+            "Remove skillet from heat and stir in 3/4 tablespoon grated Parmesan cheese. Set aside to cool.",
+            "On a lightly floured surface, roll out 5 to 6 ounces pizza dough into a 10 x 14-inch rectangle.",
+            "Spread cooled Swiss chard mixture and 3/8 cup shredded Mozzarella cheese on top of dough, leaving about 1 inch around edges.",
+            "Starting from the long side, roll up the crust to make one large loaf.",
+            "Pinch along the seam to seal and fold ends under the loaf.",
+            "Place loaf on a baking sheet sprayed with nonstick cooking spray.",
+            "Bake for 40 minutes or until golden brown.",
+            "Remove from oven and let cool for 5 minutes.",
+            "Cut into slices and serve with 9/16 cup warmed marinara sauce."
+        ],
+        "health_goal_explanation": "Selected health goal: high cholesterol. Guideline source: American Heart Association (AHA). This recipe is appropriate because it uses mostly vegetables and mushrooms, moderate low-fat cheese, and bread dough without added saturated fats. The recipe is moderate in saturated fat and cholesterol (5 mg cholesterol, 2 g saturated fat per original serving). The cheese amounts are controlled and the recipe uses nonstick spray to reduce added fats. The user should watch sodium from cheese and marinara sauce but amounts are moderate. Overall, it fits a heart-healthy diet pattern.",
+        "why_it_matches": "The recipe matches user's ingredients of mushroom, onion, cheese, bread, and spices. Swiss chard and marinara sauce are additional ingredients but minor. The recipe uses the oven appliance the user has. It fits the health goal by limiting saturated fat and cholesterol.",
+        "nutritional_information": "Calories: 193 per serving, Total Fat: 5 g, Saturated Fat: 2 g, Cholesterol: 5 mg, Sodium: 573 mg, Total Carbohydrate: 31 g, Dietary Fiber: 3 g, Protein: 8 g",
+        "recipe_url": "https://calfreshhealthyliving.cdph.ca.gov/en/recipes/Pages/Swiss-Chard-Pinwheel-Bread.aspx",
+        "llm_reported_score": "8",
+        "is_valid": true,
+        "rejection_reason": null
+    }
+]

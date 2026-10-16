@@ -1,0 +1,41 @@
+.form-section {
+  background: #f3faef;
+  padding: 28px;
+  margin-bottom: 28px;
+  border-radius: 18px;
+  border: 1px solid #b7ddb4;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+}
+
+select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #81c784;
+    border-radius: 10px;
+    font-size: 15px;
+    background-color: white;
+}
+
+button {
+    width: 100%;
+    padding: 14px;
+    background-color: #43a047;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 17px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #2e7d32;
+}
+
+.result-box {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #e8f5e9;
+    border-radius: 12px;
+    border-left: 5px solid #43a047;
+}

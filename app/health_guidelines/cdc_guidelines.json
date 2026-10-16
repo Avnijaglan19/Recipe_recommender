@@ -1,0 +1,30 @@
+{
+  "diabetes": {
+    "source": "CDC diabetes healthy eating PDF/page",
+    "prefer": [
+      "non-starchy vegetables",
+      "whole grains",
+      "lean protein",
+      "beans and lentils",
+      "water or unsweetened drinks"
+    ],
+    "limit": [
+      "added sugar",
+      "sugary drinks",
+      "large portions of rice",
+      "large portions of pasta",
+      "large portions of potatoes",
+      "fried foods",
+      "high saturated fat foods",
+      "high salt foods"
+    ],
+    "modifications": [
+      "replace refined grains with whole grains",
+      "reduce added sugar",
+      "control carb portions",
+      "add more non-starchy vegetables",
+      "use lean protein",
+      "avoid sugary sauces"
+    ]
+  }
+}

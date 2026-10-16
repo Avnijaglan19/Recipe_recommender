@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Titan Pantry Recipes — Results</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/titan.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="page-header">
+            <div>
+                <h1>Top Matches</h1>
+                <p class="subtitle">Recipes that match your ingredients and preferences.</p>
+            </div>
+        </div>
+
+        <div class="summary-grid">
+            <div class="summary-card">
+                <h2>Your Preferences</h2>
+                <p><strong>Ingredients:</strong> {{ preferences.ingredients | join(", ") if preferences.ingredients else "None" }}</p>
+                <p><strong>Meal Type:</strong> {{ preferences.meal_type or "Any" }}</p>
+                <p><strong>Servings:</strong> {{ preferences.servings or "1" }}</p>
+                <p><strong>Diet:</strong> {{ preferences.diet_type or "None" }}</p>
+            </div>
+            <div class="summary-card">
+                <h2>Details</h2>
+                <p><strong>Appliances:</strong> {{ (preferences.available_appliances or preferences.appliances) | join(", ") if (preferences.available_appliances or preferences.appliances) else "None" }}</p>
+                <p><strong>Cost Range:</strong> {{ preferences.cost_range or "Any" }}</p>
+                <p><strong>Health Issues:</strong> {{ preferences.health_issues | join(", ") if preferences.health_issues else "None" }}</p>
+                <p><strong>Cuisine:</strong> {{ preferences.cuisine or "Any" }}</p>
+            </div>
+        </div>
+
+        {% if recipes %}
+            {% for recipe in recipes %}
+                {% set has_health_tab = recipe.nutritional_information or recipe.health_goal_explanation %}
+                <div class="recipe-card">
+                    <div class="recipe-card-header">
+                        <h2>{{ recipe.recipe_title or "Recipe" }}</h2>
+                        <p class="recipe-score">Score: {{ recipe.score or "N/A" }}</p>
+                    </div>
+                    <div class="recipe-meta">
+                        <span><strong>Servings:</strong> {{ recipe.servings or preferences.servings or "N/A" }}</span>
+                        {% if recipe.recipe_url %}<span><strong>Source:</strong> <a href="{{ recipe.recipe_url }}" target="_blank">View</a></span>{% endif %}
+                    </div>
+                    {% if recipe.why_it_matches %}
+                        <p class="recipe-why">{{ recipe.why_it_matches }}</p>
+                    {% endif %}
+
+                    <div class="rtabs">
+                        <button type="button" class="rtab active" data-panel="ingredients-{{ loop.index0 }}">Ingredients</button>
+                        <button type="button" class="rtab" data-panel="directions-{{ loop.index0 }}">Directions</button>
+                        {% if has_health_tab %}
+                            <button type="button" class="rtab" data-panel="health-{{ loop.index0 }}">Health &amp; Notes</button>
+                        {% endif %}
+                    </div>
+
+                    <div class="rpanel active" id="ingredients-{{ loop.index0 }}">
+                        <div class="recipe-section">
+                            <h3>Adjusted Ingredient Amounts</h3>
+                            {% if recipe.adjusted_ingredient_amounts %}
+                                <ul class="recipe-list">
+                                    {% for item in recipe.adjusted_ingredient_amounts %}
+                                        <li>{{ item }}</li>
+                                    {% endfor %}
+                                </ul>
+                            {% else %}
+                                <p>No adjusted ingredient amounts available.</p>
+                            {% endif %}
+                        </div>
+                        <div class="recipe-section">
+                            <h3>Matched Ingredients</h3>
+                            {% if recipe.matched_ingredients %}
+                                <p>{{ recipe.matched_ingredients | join(", ") }}</p>
+                            {% else %}
+                                <p>None listed.</p>
+                            {% endif %}
+                        </div>
+                        <div class="recipe-section">
+    <h3>Additional Ingredients Needed</h3>
+    {% if recipe.additional_ingredients_needed %}
+        <p>{{ recipe.additional_ingredients_needed | join(", ") }}</p>
+    {% else %}
+        <p>None.</p>
+    {% endif %}
+    {% if recipe.pantry_available_ingredients %}
+        <div class="flash-banner" style="background:#EAF4EA; border-color:var(--leaf); color:var(--forest-deep); margin-top:10px;">
+            <strong>Good news:</strong> the pantry has {{ recipe.pantry_available_ingredients | join(", ") }} this week — grab it there to make this recipe.
+        </div>
+    {% endif %}
+</div>
+                    </div>
+
+                    <div class="rpanel" id="directions-{{ loop.index0 }}">
+                        <div class="recipe-section">
+                            <h3>Directions</h3>
+                            {% if recipe.preparation_steps %}
+                                <ol class="recipe-list">
+                                    {% for step in recipe.preparation_steps %}
+                                        <li>{{ step }}</li>
+                                    {% endfor %}
+                                </ol>
+                            {% else %}
+                                <p>No directions available.</p>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    {% if has_health_tab %}
+                        <div class="rpanel" id="health-{{ loop.index0 }}">
+                            {% if recipe.nutritional_information %}
+                                <div class="recipe-section">
+                                    <h3>Nutritional Info</h3>
+                                    <p>{{ recipe.nutritional_information }}</p>
+                                </div>
+                            {% endif %}
+                            {% if recipe.health_goal_explanation %}
+                                <div class="recipe-section">
+                                    <h3>Health Notes</h3>
+                                    {% set health_notes = recipe.health_goal_explanation.split('\n') %}
+                                    <ul class="recipe-list">
+                                        {% for note in health_notes %}
+                                            {% if note.strip() %}
+                                                <li>{{ note.strip().lstrip('- ').strip() }}</li>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="recipe-card">
+                <div class="recipe-card-header">
+                    <h2>No Recipe Found</h2>
+                </div>
+                <p class="recipe-note">We could not generate any recipes for your selected preferences.</p>
+                <pre class="recipe-text">{{ result or "Try changing your ingredients, diet, or health issue selections." }}</pre>
+            </div>
+        {% endif %}
+
+        <div class="actions">
+            <a class="button" href="{{ url_for('index') }}">Go Back</a>
+        </div>
+    </div>
+
+    <script>
+      document.querySelectorAll('.recipe-card').forEach(card => {
+        const tabs = card.querySelectorAll('.rtab');
+        tabs.forEach(tab => {
+          tab.addEventListener('click', () => {
+            tabs.forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+            card.querySelectorAll('.rpanel').forEach(p => p.classList.remove('active'));
+            const panel = card.querySelector('#' + tab.dataset.panel);
+            if (panel) panel.classList.add('active');
+          });
+        });
+      });
+    </script>
+</body>
+</html>

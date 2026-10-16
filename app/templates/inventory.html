@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Titan Pantry Recipes — Manage Inventory</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/titan.css') }}">
+</head>
+<body>
+    <div class="container" style="max-width: 720px;">
+        <div class="top-bar">
+            <a href="{{ url_for('index') }}" class="pill-link">&larr; Back to search</a>
+            <a href="{{ url_for('logout') }}" class="pill-link">Log out</a>
+        </div>
+
+        <div class="page-header">
+            <h1>Manage Pantry Inventory</h1>
+            <p class="subtitle">Upload this week's invoices, or add items by hand.</p>
+        </div>
+
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <div class="flash-banner">
+              {% for message in messages %}<p style="margin:0;">{{ message }}</p>{% endfor %}
+            </div>
+          {% endif %}
+        {% endwith %}
+
+        <div class="form-section">
+            <h2>Upload Invoices</h2>
+            <p class="step-hint">PDF only. You can select multiple files at once.</p>
+            <form action="{{ url_for('inventory_upload') }}" method="POST" enctype="multipart/form-data">
+                <div class="field">
+                    <input type="file" name="invoices" accept="application/pdf" multiple required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width:auto;">Extract Items</button>
+            </form>
+        </div>
+
+        <div class="form-section">
+            <h2>Add an Item Manually</h2>
+            <form action="{{ url_for('inventory_manual_add') }}" method="POST">
+                <div class="field">
+                    <label for="manual-item-name">Item name</label>
+                    <input type="text" id="manual-item-name" name="item_name" placeholder="e.g. Canned Beans" required
+                           style="width:100%; padding:13px 14px; border:1px solid var(--line); border-radius:10px; font-size:15px;">
+                </div>
+                <div class="field">
+                    <label for="manual-quantity">Quantity (optional)</label>
+                    <input type="text" id="manual-quantity" name="quantity" placeholder="e.g. 12 cans"
+                           style="width:100%; padding:13px 14px; border:1px solid var(--line); border-radius:10px; font-size:15px;">
+                </div>
+                <button type="submit" class="btn btn-primary" style="width:auto;">Add Item</button>
+            </form>
+        </div>
+
+        <div class="form-section">
+            <h2>Current Inventory ({{ items | length }})</h2>
+            {% if not items %}
+                <p class="recipe-note">No items in inventory yet.</p>
+            {% else %}
+                <div class="check-grid" style="grid-template-columns: 1fr;">
+                    {% for item in items %}
+                        <div class="check-item" style="cursor: default;">
+                            <span style="flex:1;">
+                                <strong>{{ item.item_name }}</strong>
+                                {% if item.quantity %} — {{ item.quantity }}{% endif %}
+                                <span class="history-badge" style="margin-left:8px;">{{ item.source }}</span>
+                            </span>
+                            <form action="{{ url_for('inventory_remove', item_id=item.id) }}" method="POST" style="margin:0;">
+                                <button type="submit" class="btn-ghost" style="opacity:1; color:#B4472C; padding:0;">Remove</button>
+                            </form>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
